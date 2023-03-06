@@ -7,10 +7,10 @@ To setup, Make sure you have the following;
 - git (`sudo apt-get install git`)
 
 Now follow the following instructions,
-1.) If you're not inside your home directory. Go there with `cd ~`.
-2.) Clone the repo, `git clone https://github.com/is-it-ayush/.dotfiles.git`.
-3.) CD into it, `cd .dotfiles`.
-4.) Run the Install script, `sudo bash install`.
+1) If you're not inside your home directory. Go there with `cd ~`.
+2) Clone the repo, `git clone https://github.com/is-it-ayush/.dotfiles.git`.
+3) CD into it, `cd .dotfiles`.
+4) Run the Install script, `sudo bash install`.
 
 ### Common Troubleshooting
 - If you get any error like it's not found or somnething when running `sudo bash install`. Make sure it has executebale permissions. If not, simply do `chmod +x install.sh`. That should fix it.
