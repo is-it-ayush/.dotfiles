@@ -38,24 +38,21 @@ if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
         print -P "%F{33} %F{34}Installation successful.%f%b" || \
         print -P "%F{160} The clone has failed.%f%b"
 fi
-
 source $HOME/.local/share/zinit/zinit.git/zinit.zsh
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 
-# 
+# this is just nvm stuff
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# disbale auto-correct
-
+# This will help zsh to ask me for my gpg pass in a nice way. :)
 GPG_TTY=$(tty)
 export GPG_TTY=$(tty)
 
-# This is for testing Github Copilot CLI. It should add ??, gh? & git? to the command line.
-eval "$(github-copilot-cli alias -- "$0")"
-
+# Some Useful Stuff
+eval "$(github-copilot-cli alias -- "$0")" # ??, gh?, git?. Cool Copilot CLI stuff.
+eval `ssh-agent -s` # Starting SSH agent.
