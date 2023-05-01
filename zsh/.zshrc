@@ -1,6 +1,6 @@
 # Environments & Stuff
 export PNPM_HOME="/home/isitayush/.local/share/pnpm" # setup pnpm
-export XDG_CONFIG_HOME=$HOME # Need this for vim & other things.
+export XDG_CONFIG_HOME=$HOME/.config # Need this for vim & other things.
 export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export PATH=$PNPM_HOME:$HOME/bin:/usr/local/bin:$PATH
@@ -12,6 +12,9 @@ export ZSH="$HOME/.oh-my-zsh"
 export ZSH_THEME="robbyrussell"
 zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
+# Something I forgor.💀
+source $ZSH/oh-my-zsh.sh
+
 # Just Some Config
 DISABLE_LS_COLORS="true" # disables colors in ls
 ENABLE_CORRECTION="true" # autocorrects commands
@@ -19,9 +22,6 @@ HIST_STAMPS="dd.mm.yyyy" # eh, time.
 plugins=(git) # fancy plugins. ✨
 unsetopt correct_all # disables auto-correct.
 unsetopt correct
-
-# Something I forgor.💀
-source $ZSH/oh-my-zsh.sh
 
 # ALIASSSES! 💙
 alias zc="nano ~/.zshrc"
