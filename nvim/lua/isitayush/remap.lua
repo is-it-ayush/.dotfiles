@@ -15,3 +15,7 @@ vim.keymap.set("n", "<leader>ztv", ":vsplit | terminal<CR>")
 -- This is for the terminal normal mode fix. Ref :help terminal
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", { noremap = true })
 
+-- Cool Things! : D
+vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
+vim.keymap.set("n", "<leader>bruh", "<cmd>CellularAutomaton game_of_life<CR>")
+
