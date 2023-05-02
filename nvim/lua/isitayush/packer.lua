@@ -53,9 +53,20 @@ return require('packer').startup(function(use)
 	  }
   }
 
-  use("folke/zen-mode.nvim")
+  use("folke/zen-mode.nvim") -- :ZenMode
   use("github/copilot.vim")
   use("eandrju/cellular-automaton.nvim")
-  use("laytan/cloak.nvim")
+
+  
+  -- This is the trouble plugin for errors & stuff.
+  use {
+    "folke/trouble.nvim",
+    requires = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        icon = false,
+      }
+    end
+  }
 
 end)

@@ -12,5 +12,7 @@ Now follow the following instructions,
 3) CD into it, `cd .dotfiles`.
 4) Run the Install script, `sudo bash install`.
 
+Nvim Config's are not yet auto installed. I'll fix this later. For now, paste them into $XDG_CONFIG_HOME path. Open nvim & run `:PackerSync`. : )
+
 ### Common Troubleshooting
 - If you get any error like it's not found or somnething when running `sudo bash install`. Make sure it has executebale permissions. If not, simply do `chmod +x install.sh`. That should fix it.
