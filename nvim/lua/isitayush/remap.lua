@@ -25,5 +25,5 @@ vim.keymap.set("n", "<leader>bo", "<cmd>%bd|e#<cr>", {desc="Close all buffers bu
 -- Bind Ctrl + s to Save the file & switch to normal mode.
 vim.keymap.set("i", "<C-s>", "<cmd>:w<CR><ESC>", { noremap = true });
 
--- Bind ~ to Neogit.
+-- Bind gg to Neogit.
 vim.keymap.set("n", "<leader>gg", "<cmd>:Neogit<cr>");
