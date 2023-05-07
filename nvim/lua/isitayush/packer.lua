@@ -57,7 +57,7 @@ return require('packer').startup(function(use)
   use("github/copilot.vim")
   use("eandrju/cellular-automaton.nvim")
 
-  
+
   -- This is the trouble plugin for errors & stuff.
   use {
     "folke/trouble.nvim",
@@ -68,5 +68,8 @@ return require('packer').startup(function(use)
       }
     end
   }
+
+  -- This is for neogit.
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 
 end)

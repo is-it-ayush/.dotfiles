@@ -19,3 +19,11 @@ vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", { noremap = true })
 vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
 vim.keymap.set("n", "<leader>bruh", "<cmd>CellularAutomaton game_of_life<CR>")
 
+-- Clear buffers in case nvim slow's down.
+vim.keymap.set("n", "<leader>bo", "<cmd>%bd|e#<cr>", {desc="Close all buffers but the current one"}) -- https://stackoverflow.com/a/42071865/516188
+
+-- Bind Ctrl + s to Save the file & switch to normal mode.
+vim.keymap.set("i", "<C-s>", "<cmd>:w<CR><ESC>", { noremap = true });
+
+-- Bind ~ to Neogit.
+vim.keymap.set("n", "<leader>gg", "<cmd>:Neogit<cr>");
