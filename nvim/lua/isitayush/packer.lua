@@ -72,4 +72,6 @@ return require('packer').startup(function(use)
   -- This is for neogit.
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 
+  -- Optional. You can remove it.
+  use('wakatime/vim-wakatime')
 end)
