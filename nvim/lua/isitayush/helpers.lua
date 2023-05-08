@@ -1,4 +1,11 @@
---[=[
+--[[
+-- This is a trash workaround for copying from wsl to windows clipboard.
+-- For me (ie. with this config), pasting from windows clipboard to wsl work fine. 
+-- But copying from wsl to windows clipboard doesn't work.
+--
+-- This is a workaround for that. Also yeah, vim's solution doesn't work.
+-- Since powershell.exe causes rendering issues while pasting text.
+--]]
 function _G.copy_to_clipboard()
   -- Grab the current position
   -- getpos returns: []
@@ -26,6 +33,4 @@ end
   augroup END
   ]])
 
---]=]
--- I've never seen such multiline comments...I do have a lot of questions.
 
