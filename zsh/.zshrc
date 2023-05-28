@@ -55,4 +55,19 @@ export GPG_TTY=$(tty)
 
 # Some Useful Stuff
 eval "$(github-copilot-cli alias -- "$0")" # ??, gh?, git?. Cool Copilot CLI stuff.
-eval `ssh-agent -s` # Starting SSH agent.
+
+# SSH Agent Thingy.
+if ps -p $SSH_AGENT_PID > /dev/null
+then
+    echo "An instance of ssh-agent is already running."
+else
+    eval `ssh-agent -s`
+    ssh-add ~/.ssh/id_rsa
+fi
+
+# Turso
+export PATH="/home/isitayush/.turso:$PATH"
+
+# Flyctl
+export FLYCTL_INSTALL="/home/isitayush/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
