@@ -56,18 +56,39 @@ export GPG_TTY=$(tty)
 # Some Useful Stuff
 eval "$(github-copilot-cli alias -- "$0")" # ??, gh?, git?. Cool Copilot CLI stuff.
 
-# SSH Agent Thingy.
-if ps -p $SSH_AGENT_PID > /dev/null
-then
-    echo "An instance of ssh-agent is already running."
-else
-    eval `ssh-agent -s`
-    ssh-add ~/.ssh/id_rsa
-fi
-
-# Turso
-export PATH="/home/isitayush/.turso:$PATH"
+# Turso & ssh-ident.
+export PATH="~/bin:/home/isitayush/.turso:$PATH"
 
 # Flyctl
 export FLYCTL_INSTALL="/home/isitayush/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+# https://stackoverflow.com/a/48509425/13266368
+# https://rabexc.org/posts/pitfalls-of-ssh-agents
+# SSH Agent Thingy. Ensure the agent is running.
+
+# Note: /dev/null is a black hole where any data sent, will be discarded.
+# Use it if you want to run a command but don't want to see the output.
+ssh-add -l &>/dev/null
+if [ "$?" -eq 2 ]; then
+    # Could not open a connection to your authentication agent.
+
+    # Load stored agent connection info.
+    test -r ~/.ssh-agent && \
+        eval "$(<~/.ssh-agent)" >/dev/null
+
+    ssh-add -l &>/dev/null
+    if [ "$?" -eq 2 ]; then
+        # Start agent and store agent connection info.
+        (umask 066; ssh-agent > ~/.ssh-agent)
+        eval "$(<~/.ssh-agent)" >/dev/null
+    fi
+fi
+
+# Load identities
+ssh-add -l &>/dev/null
+if [ $? -eq 1 ]; then
+    # The agent has no identities.
+    # Time to add one.
+    ssh-add -t 4h
+fi
