@@ -27,3 +27,7 @@ vim.keymap.set("i", "<C-s>", "<cmd>:w<CR><ESC>", { noremap = true });
 
 -- Bind ~ to Neogit.
 vim.keymap.set("n", "<leader>gg", "<cmd>:Neogit<cr>");
+
+
+-- Dir Tree.
+vim.api.nvim_set_keymap("n", "<C-q>", ":NvimTreeToggle<cr>", {silent = true, noremap = true})
