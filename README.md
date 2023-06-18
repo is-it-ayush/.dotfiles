@@ -1,18 +1,24 @@
-### Ayush's Configurations
+## Ayush's Configs
 
-These are my personal configurations for setting up my environment.
-To setup, Make sure you have the following;
+These are my somewhat working configs for nvim and zsh. I'll expand more on them later on. `git clone` & `sudo bash install`. : )
+
+### Requirementes
+Ensure you have the following
 - [zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH#how-to-install-zsh-on-many-platforms) / [Oh My ZSH](https://github.com/ohmyzsh/ohmyzsh/wiki).
 - stow (`sudo apt-get install stow`)
 - git (`sudo apt-get install git`)
 
-Now follow the following instructions,
+### Installation
 1) If you're not inside your home directory. Go there with `cd ~`.
 2) Clone the repo, `git clone https://github.com/is-it-ayush/.dotfiles.git`.
 3) CD into it, `cd .dotfiles`.
 4) Run the Install script, `sudo bash install`.
 
-Nvim Config's are not yet auto installed. I'll fix this later. For now, paste them into $XDG_CONFIG_HOME path. Open nvim & run `:PackerSync`. : )
+### What install does?
+The install script simply stows (links) the files from ~/.dotfiles into their
+respective locations within the file system. For example: It'll link the nvim
+folder to ~/.config/nvim so nvim can read it.
 
-### Common Troubleshooting
-- If you get any error like it's not found or somnething when running `sudo bash install`. Make sure it has executebale permissions. If not, simply do `chmod +x install.sh`. That should fix it.
+### Troubleshooting
+- Ensure that `./install` script has executable perms.
+If not, do `chmod +x install` to fix it.
