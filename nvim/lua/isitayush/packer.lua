@@ -57,6 +57,8 @@ return require('packer').startup(function(use)
   use("github/copilot.vim")
   use("eandrju/cellular-automaton.nvim")
 
+  -- This is for side tree.
+  use('nvim-tree/nvim-tree.lua')
 
   -- This is the trouble plugin for errors & stuff.
   use {
