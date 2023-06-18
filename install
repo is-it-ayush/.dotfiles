@@ -1,18 +1,28 @@
 #!/usr/bin/zsh
 
+# If STOW_FOLDERS is not set, default to stowing all folders
 if [[ -z $STOW_FOLDERS ]]; then
-    export STOW_FOLDERS="zsh"
+    export STOW_FOLDERS="zsh,nvim"
 fi
 
+# If DOTFILES is not set, default to ~/.dotfiles
 if [[ -z $DOTFILES ]]; then
     export DOTFILES=$HOME/.dotfiles
 fi
 
-pushd $DOTFILES
+# We move to the dotfiles directory.
+pushd $DOTFILES > /dev/null
+
+# do the thingy...(except for zsh, treat every folder as a .config folder)
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
   echo "Stowing $folder"
-  stow -D $folder
-  stow $folder
+  if [[ $folder == "zsh" ]]; then
+    stow -t $HOME $folder
+  else
+    stow -t $HOME/.config/$folder $folder
+  fi
 done
-popd
+
+# We return to the original directory
+popd > /dev/null
