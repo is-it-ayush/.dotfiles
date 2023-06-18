@@ -4,7 +4,6 @@ export XDG_CONFIG_HOME=$HOME/.config # Need this for vim & other things.
 export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export PATH=$PNPM_HOME:$HOME/bin:/usr/local/bin:$PATH
-
 source /home/isitayush/.profile # This get's missing commands from bash, also a lonely setting with no header hehe.
 
 # OMZ stuff.
@@ -24,11 +23,22 @@ unsetopt correct_all # disables auto-correct.
 unsetopt correct
 
 # ALIASSSES! 💙
-alias zc="nano ~/.zshrc"
-alias ozc="nano ~/.oh-my-zsh"
+alias vim="nvim"
+alias v="nvim"
+
+alias gg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
+alias gl="git log" # thanks @samvdst
+alias gs="git status"
+alias gc="git commit"
+alias gca="git commit --amend"
+
+alias zc="nvim ~/.dotfiles"
+alias ozc="nvim ~/.oh-my-zsh"
 alias work="cd ~/work/"
 alias personal="cd ~/personal/"
 alias lla="ls -all"
+alias ncg="npm list -g --depth=0 | cut -d ' ' -f 2 | tail -n +2 | tr '\n\r' ' ' | clip.exe" # copy global npm packages
+alias cat="batcat" # better cat : )
 
 ### Don't know but this was added by zinit installer. So Gotta be useful ig.  :<
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
