@@ -1,0 +1,22 @@
+# These are some useful alacritty kebinds
+# Control + Shift + T -> New Terminal Window
+# Control + Y -> Copy
+# Control + V -> Paste
+
+[[keyboard.bindings]]
+key = "T"
+mods = "Control | Shift"
+action = "CreateNewWindow"
+
+[[keyboard.bindings]]
+key = "P"
+mods = "Control"
+mode = "~Vi"
+action = "Paste"
+
+[[keyboard.bindings]]
+key = "Y"
+mods = "Control"
+action = "Copy"
+
+
