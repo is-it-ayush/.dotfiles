@@ -1,6 +1,6 @@
 --[[
 -- This is a trash workaround for copying from wsl to windows clipboard.
--- For me (ie. with this config), pasting from windows clipboard to wsl work fine. 
+-- For me (ie. with this config), pasting from windows clipboard to wsl work fine.
 -- But copying from wsl to windows clipboard doesn't work.
 --
 -- This is a workaround for that. Also yeah, vim's solution doesn't work.
@@ -19,8 +19,18 @@ function _G.copy_to_clipboard()
     lines[#lines] = string.sub(lines[#lines], 1, end_pos[3])
     lines[1] = string.sub(lines[1], start_pos[3])
     local text = table.concat(lines, "\n")
-    -- todo: make it system aware. :
-    vim.fn.system('clip.exe', text)
+
+    -- System Aware Copying.
+    local sysname = vim.loop.os_uname().sysname
+    if sysname == "Linux" then
+      vim.fn.system('xclip -selection clipboard', text)
+    elseif sysname == "Window" then
+      vim.fn.system('clip.exe', text)
+    elseif sysname == "Darwin" then
+      vim.fn.system('pbcopy', text)
+    else
+      print('Unable to detect OS for copying operation.')
+    end
   end
 end
 

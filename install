@@ -2,7 +2,7 @@
 
 # If STOW_FOLDERS is not set, default to stowing all folders
 if [[ -z $STOW_FOLDERS ]]; then
-    export STOW_FOLDERS="zsh,nvim"
+    export STOW_FOLDERS="zsh,nvim,alacritty"
 fi
 
 # If DOTFILES is not set, default to ~/.dotfiles
@@ -13,16 +13,31 @@ fi
 # We move to the dotfiles directory.
 pushd $DOTFILES > /dev/null
 
-# do the thingy...(except for zsh, treat every folder as a .config folder)
+# Except for zsh, treat every folder as a .config folder
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
-  echo "Stowing $folder"
+  echo "[config] Linking $folder."
   if [[ $folder == "zsh" ]]; then
     stow -t $HOME $folder
   else
+    # Create directory if it doesn't exist.
+    if [[ ! -d $HOME/.config/$folder ]]; then
+      mkdir $HOME/.config/$folder
+    fi
     stow -t $HOME/.config/$folder $folder
   fi
 done
 
 # We return to the original directory
 popd > /dev/null
+
+# We setup packer for nvim to recognize lua.
+PACKER_PATH=".local/share/nvim/site/pack/packer/start/packer.nvim"
+if [[ ! -e $HOME/$PACKER_PATH ]]; then
+  git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/$PACKER_PATH
+  echo "[nvim] Installed packer on $PACKER_PATH"
+else
+  echo "[nvim] Packer is already installed."
+fi
+
+

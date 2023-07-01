@@ -1,10 +1,18 @@
 # Environments & Stuff
-export PNPM_HOME="/home/isitayush/.local/share/pnpm" # setup pnpm
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export PNPM_HOME="/home/ayush/.local/share/pnpm" # setup pnpm
 export XDG_CONFIG_HOME=$HOME/.config # Need this for vim & other things.
 export MANPATH="/usr/local/man:$MANPATH"
-export LANG=en_US.UTF-8
 export PATH=$PNPM_HOME:$HOME/bin:/usr/local/bin:$PATH
-source /home/isitayush/.profile # This get's missing commands from bash, also a lonely setting with no header hehe.
+source /home/ayush/.profile # This get's missing commands from bash, also a lonely setting with no header hehe.
+export EDITOR=nvim
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US
+export LC_CTYPE=en_US.UTF-8
+export GDM_LANG=en_US
+export TERM="alacritty"
 
 # OMZ stuff.
 export ZSH="$HOME/.oh-my-zsh"
@@ -37,8 +45,8 @@ alias ozc="nvim ~/.oh-my-zsh"
 alias work="cd ~/work/"
 alias personal="cd ~/personal/"
 alias lla="ls -all"
-alias ncg="npm list -g --depth=0 | cut -d ' ' -f 2 | tail -n +2 | tr '\n\r' ' ' | clip.exe" # copy global npm packages
-alias cat="batcat" # better cat : )
+alias ncg="npm list -g --depth=0 | cut -d ' ' -f 2 | tail -n +2 | tr '\n\r' ' ' | xclip -sel clip" # copy global npm packages
+# alias cat="batcat" # better cat : )
 
 ### Don't know but this was added by zinit installer. So Gotta be useful ig.  :<
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -67,10 +75,10 @@ export GPG_TTY=$(tty)
 eval "$(github-copilot-cli alias -- "$0")" # ??, gh?, git?. Cool Copilot CLI stuff.
 
 # Turso & ssh-ident.
-export PATH="~/bin:/home/isitayush/.turso:$PATH"
+export PATH="~/bin:/home/ayush/.turso:$PATH"
 
 # Flyctl
-export FLYCTL_INSTALL="/home/isitayush/.fly"
+export FLYCTL_INSTALL="/home/ayush/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # https://stackoverflow.com/a/48509425/13266368
@@ -102,3 +110,4 @@ if [ $? -eq 1 ]; then
     # Time to add one.
     ssh-add -t 4h
 fi
+fpath+=${ZDOTDIR:-~}/.zsh_functions
