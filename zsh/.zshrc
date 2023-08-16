@@ -4,7 +4,8 @@ export LC_ALL=en_US.UTF-8
 export PNPM_HOME="/home/ayush/.local/share/pnpm" # setup pnpm
 export XDG_CONFIG_HOME=$HOME/.config # Need this for vim & other things.
 export MANPATH="/usr/local/man:$MANPATH"
-export PATH=$PNPM_HOME:$HOME/bin:/usr/local/bin:$PATH
+export LOCAL_BIN="$HOME/.local/bin/"
+export PATH=$PNPM_HOME:$HOME/bin:$LOCAL_BIN:/usr/local/bin:/usr/sbin:$PATH
 source /home/ayush/.profile # This get's missing commands from bash, also a lonely setting with no header hehe.
 export EDITOR=nvim
 export LANGUAGE=en_US.UTF-8
@@ -19,8 +20,9 @@ export ZSH="$HOME/.oh-my-zsh"
 export ZSH_THEME="robbyrussell"
 zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
-# Something I forgor.💀
+# A few important sources.
 source $ZSH/oh-my-zsh.sh
+source "$HOME/.cargo/env"
 
 # Just Some Config
 DISABLE_LS_COLORS="true" # disables colors in ls
@@ -46,6 +48,10 @@ alias work="cd ~/work/"
 alias personal="cd ~/personal/"
 alias lla="ls -all"
 alias ncg="npm list -g --depth=0 | cut -d ' ' -f 2 | tail -n +2 | tr '\n\r' ' ' | xclip -sel clip" # copy global npm packages
+alias sudo='sudo -E env "PATH=$PATH"'
+alias lzd="sudo lazydocker"
+alias lzg="lazygit"
+alias vms="cd /media/ayush/New\ Volume/tools/vms"
 # alias cat="batcat" # better cat : )
 
 ### Don't know but this was added by zinit installer. So Gotta be useful ig.  :<
