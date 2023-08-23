@@ -12,10 +12,21 @@ return require('packer').startup(function(use)
   use('wbthomason/packer.nvim')
 
   -- This the finder thingy.
+  use{
+    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    -- or                            , branch = '0.1.x',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+
+  -- The project switching stuff.
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.1',
-	  -- or                            , branch = '0.1.x',
-	  requires = { {'nvim-lua/plenary.nvim'} }
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup {
+        show_hidden = true,
+        patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "./*.lock" },
+      }
+    end
   }
 
   -- Rose Pine Scheme, Color Scheme.
