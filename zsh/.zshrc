@@ -15,6 +15,10 @@ export LC_CTYPE=en_US.UTF-8
 export GDM_LANG=en_US
 export TERM="alacritty"
 
+# Stuff I dont understand but is required for windows stuff.
+# export PKG_CONFIG_SYSROOT_DIR="/usr/lib/x86_64-linux-gnu/"
+# export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig"
+
 # OMZ stuff.
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_THEME="robbyrussell"

@@ -1,39 +1,31 @@
---CC Call Tree:
--- init.lua
---
---  --> isitayush/init.lua
---  	--> require("packer.lua")
-
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
-  -- Packer can manage itself
   use('wbthomason/packer.nvim')
 
-  -- This the finder thingy.
+  -- telescope
   use{
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
-    -- or                            , branch = '0.1.x',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  -- The project switching stuff.
+  -- switch projects
   use {
     "ahmedkhalf/project.nvim",
     config = function()
       require("project_nvim").setup {
         show_hidden = true,
-        patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "./*.lock" },
+        detection_methods={"pattern"},
+        patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile" },
       }
     end
   }
 
-  -- Rose Pine Scheme, Color Scheme.
+  -- theme
   use({ 'rose-pine/neovim', as = 'rose-pine' })
   vim.cmd('colorscheme rose-pine')
 
-  -- This is for treesitter, becuase you need to color your languages. (man vscode was ez.)
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('nvim-treesitter/playground')
   use('theprimeagen/harpoon')
@@ -41,7 +33,7 @@ return require('packer').startup(function(use)
   use('tpope/vim-fugitive')
   use('laytan/cloak.nvim')
 
-  -- This the scary lsp stuff. This is hard asf.💀
+  -- lsp
   use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  branch = 'v1.x',
@@ -50,27 +42,26 @@ return require('packer').startup(function(use)
 		  {'neovim/nvim-lspconfig'},
 		  {'williamboman/mason.nvim'},
 		  {'williamboman/mason-lspconfig.nvim'},
+      {'simrat39/rust-tools.nvim'}, -- for rust.
 
 		  -- Autocompletion
 		  {'hrsh7th/nvim-cmp'},
 		  {'hrsh7th/cmp-buffer'},
 		  {'hrsh7th/cmp-path'},
-		  {'saadparwaiz1/cmp_luasnip'},
 		  {'hrsh7th/cmp-nvim-lsp'},
 		  {'hrsh7th/cmp-nvim-lua'},
 
 		  -- Snippets
 		  {'L3MON4D3/LuaSnip'},
-		  {'rafamadriz/friendly-snippets'},
+      {'saadparwaiz1/cmp_luasnip'},
+      {'rafamadriz/friendly-snippets'},
 	  }
   }
 
   use("folke/zen-mode.nvim") -- :ZenMode
-  use("github/copilot.vim")
+  -- use("github/copilot.vim")
   use("eandrju/cellular-automaton.nvim")
-
-  -- This is for side tree.
-  use('nvim-tree/nvim-tree.lua')
+  use('nvim-tree/nvim-tree.lua') -- Dir Tree
 
   -- This is the trouble plugin for errors & stuff.
   use {
@@ -82,10 +73,13 @@ return require('packer').startup(function(use)
       }
     end
   }
-
-  -- This is for neogit.
+  use({
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  })
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
-
-  -- Optional. You can remove it.
+  use('mfussenegger/nvim-dap')
   use('wakatime/vim-wakatime')
 end)

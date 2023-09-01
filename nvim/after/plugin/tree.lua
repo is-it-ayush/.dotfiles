@@ -33,11 +33,11 @@ require("nvim-tree").setup({
       },
       glyphs = {
        git = {
-          unstaged = "NS",
+          unstaged = "US",
           staged = "S",
-          unmerged = "NU",
+          unmerged = "UM",
           renamed = "R",
-          untracked = "T",
+          untracked = "UT",
           deleted = "D",
           ignored = "I",
         },
