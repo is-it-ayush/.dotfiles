@@ -11,7 +11,8 @@ lsp.ensure_installed({
 lsp.nvim_workspace()
 
 lsp.set_preferences({
-    suggest_lsp_servers = false,
+    suggest_lsp_servers = true,
+    inlay_hint = true,
     sign_icons = {
         error = 'E',
         warn = 'W',
@@ -61,12 +62,14 @@ require('lspconfig').rust_analyzer.setup({
   settings = {
     ["rust-analyzer"] = {
       assist = {
-        importGranularity = "module",
-        importPrefix = "by_self"
+        importGranularity = {
+          group = "module"
+        },
+        importPrefix = "self"
       },
       -- enable proc macro support
-      cargo = {loadOutDirsFromCheck = true},
-      procMacro = {enable = true}
+      cargo = {loadOutDirsFromCheck = true, buildScripts = { enable = true }},
+      procMacro = {enable = true},
     }
   }
 });

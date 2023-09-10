@@ -39,7 +39,7 @@ unsetopt correct
 # ALIASSSES! 💙
 alias vim="nvim"
 alias v="nvim"
-
+alias vh="rg -i 'keymap' ~/.dotfiles/nvim/"
 alias gg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
 alias gl="git log" # thanks @samvdst
 alias gs="git status"
@@ -51,6 +51,8 @@ alias ozc="nvim ~/.oh-my-zsh"
 alias work="cd ~/work/"
 alias personal="cd ~/personal/"
 alias lla="ls -all"
+alias llah="ls -all -h"
+alias tl="tree -L"
 alias ncg="npm list -g --depth=0 | cut -d ' ' -f 2 | tail -n +2 | tr '\n\r' ' ' | xclip -sel clip" # copy global npm packages
 alias sudo='sudo -E env "PATH=$PATH"'
 alias lzd="sudo lazydocker"
@@ -121,3 +123,14 @@ if [ $? -eq 1 ]; then
     ssh-add -t 4h
 fi
 fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+# bun completions
+[ -s "/home/ayush/.bun/_bun" ] && source "/home/ayush/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

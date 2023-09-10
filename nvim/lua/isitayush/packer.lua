@@ -28,7 +28,6 @@ return require('packer').startup(function(use)
 
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('nvim-treesitter/playground')
-  use('theprimeagen/harpoon')
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
   use('laytan/cloak.nvim')
@@ -36,7 +35,7 @@ return require('packer').startup(function(use)
   -- lsp
   use {
 	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v1.x',
+	  branch = 'v2.x',
 	  requires = {
 		  -- LSP Support
 		  {'neovim/nvim-lspconfig'},

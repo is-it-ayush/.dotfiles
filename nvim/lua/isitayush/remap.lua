@@ -8,13 +8,15 @@ vim.keymap.set("n", "<leader>zx", "<cmd>:close<CR>")
 vim.keymap.set("n", "<leader>ht", "<cmd>:split | terminal<CR>")
 vim.keymap.set("n", "<leader>vt", "<cmd>:vsplit | terminal<CR>")
 
+-- Other shortcuts.
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", { noremap = true }) -- remap ESC key in terminal mode.
 vim.keymap.set("n", "<leader>bo", "<cmd>%bd|e#<cr>", {desc="Close all buffers but the current one"}) -- https://stackoverflow.com/a/42071865/516188
 vim.keymap.set("i", "<C-s>", "<cmd>:w<ESC>", { noremap = true }); -- save file & exit to normal mode.
 vim.keymap.set("n", "<leader>gg", "<cmd>:Neogit<cr>"); -- neogit
 vim.api.nvim_set_keymap("n", "<C-q>", ":NvimTreeToggle<cr>", {silent = true, noremap = true}); -- dir tree
-vim.keymap.set("", "<Leader>l", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" }); -- toggle lsp lines.
-vim.keymap.set("n", "tt", "<cmd>:TroubleToggle<CR>", { silent = true, desc = "Toggle Trouble" });
+vim.keymap.set("", "<leader>l", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" }); -- toggle lsp lines.
+vim.keymap.set("n", "<leader>tt", "<cmd>:TroubleToggle<CR>", { silent = true, desc = "Toggle Trouble" });
+vim.keymap.set("n", "<C-[>", "<C-T>", { noremap = true });
 
 -- Thanks prime. :3
 vim.keymap.set("n", "Q", "<nop>"); -- nop = do nothing; remap default kep map.
