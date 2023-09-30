@@ -55,7 +55,7 @@ alias llah="ls -all -h"
 alias tl="tree -L"
 alias ncg="npm list -g --depth=0 | cut -d ' ' -f 2 | tail -n +2 | tr '\n\r' ' ' | xclip -sel clip" # copy global npm packages
 alias sudo='sudo -E env "PATH=$PATH"'
-alias lzd="sudo lazydocker"
+alias lzd='DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock lazydocker'
 alias lzg="lazygit"
 alias vms="cd /media/ayush/New\ Volume/tools/vms"
 
