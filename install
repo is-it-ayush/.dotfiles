@@ -29,8 +29,6 @@ PACKER_PATH=".local/share/nvim/site/pack/packer/start/packer.nvim"
 if [[ ! -d $HOME/$PACKER_PATH ]]; then
   git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/$PACKER_PATH
   echo "[nvim] Installed packer on $PACKER_PATH"
-else
-  echo "[nvim] Packer is already installed."
 fi
 
 # install some useful programs.
