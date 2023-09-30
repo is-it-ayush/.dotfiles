@@ -2,11 +2,11 @@ vim.g.mapleader = " "
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- Window & Terminal Shortcuts: )
-vim.keymap.set("n", "<leader>hz", "<cmd>:split<CR>")
-vim.keymap.set("n", "<leader>vz", "<cmd>:vsplit<CR>")
-vim.keymap.set("n", "<leader>zx", "<cmd>:close<CR>")
-vim.keymap.set("n", "<leader>ht", "<cmd>:split | terminal<CR>")
-vim.keymap.set("n", "<leader>vt", "<cmd>:vsplit | terminal<CR>")
+vim.keymap.set("n", "<leader>hz", "<cmd>:split<CR>");
+vim.keymap.set("n", "<leader>vz", "<cmd>:vsplit<CR>");
+vim.keymap.set("n", "<leader>zx", "<cmd>:close<CR>");
+vim.keymap.set("n", "<leader>ht", "<cmd>:split | terminal<CR>");
+vim.keymap.set("n", "<leader>vt", "<cmd>:vsplit | terminal<CR>");
 
 -- Other shortcuts.
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>", { noremap = true }) -- remap ESC key in terminal mode.
@@ -17,6 +17,8 @@ vim.api.nvim_set_keymap("n", "<C-q>", ":NvimTreeToggle<cr>", {silent = true, nor
 vim.keymap.set("", "<leader>l", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" }); -- toggle lsp lines.
 vim.keymap.set("n", "<leader>tt", "<cmd>:TroubleToggle<CR>", { silent = true, desc = "Toggle Trouble" });
 vim.keymap.set("n", "<C-[>", "<C-T>", { noremap = true });
+
+
 
 -- Thanks prime. :3
 vim.keymap.set("n", "Q", "<nop>"); -- nop = do nothing; remap default kep map.

@@ -1,0 +1,16 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+name = Ayush Gupta
+email = ayush.keshav2004@gmail.com
+	signingkey = 500BCFAC1C22EB30AF3CCA49752E6D3E149DE364
+[commit]
+	gpgsign = true
+[credential "https://github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+[credential]
+	helper = libsecret

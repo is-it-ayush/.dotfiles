@@ -5,9 +5,9 @@ return require('packer').startup(function(use)
   use('wbthomason/packer.nvim')
 
   -- telescope
-  use{
+  use {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
   -- switch projects
@@ -16,7 +16,7 @@ return require('packer').startup(function(use)
     config = function()
       require("project_nvim").setup {
         show_hidden = true,
-        detection_methods={"pattern"},
+        detection_methods = { "pattern" },
         patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile" },
       }
     end
@@ -26,7 +26,7 @@ return require('packer').startup(function(use)
   use({ 'rose-pine/neovim', as = 'rose-pine' })
   vim.cmd('colorscheme rose-pine')
 
-  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+  use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
   use('nvim-treesitter/playground')
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
@@ -34,33 +34,49 @@ return require('packer').startup(function(use)
 
   -- lsp
   use {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v2.x',
-	  requires = {
-		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},
-		  {'williamboman/mason.nvim'},
-		  {'williamboman/mason-lspconfig.nvim'},
-      {'simrat39/rust-tools.nvim'}, -- for rust.
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
+    requires = {
+      -- LSP Support
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
+      { 'simrat39/rust-tools.nvim' }, -- for rust.
 
-		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},
-		  {'hrsh7th/cmp-buffer'},
-		  {'hrsh7th/cmp-path'},
-		  {'hrsh7th/cmp-nvim-lsp'},
-		  {'hrsh7th/cmp-nvim-lua'},
+      -- Autocompletion
+      { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-nvim-lua' },
 
-		  -- Snippets
-		  {'L3MON4D3/LuaSnip'},
-      {'saadparwaiz1/cmp_luasnip'},
-      {'rafamadriz/friendly-snippets'},
-	  }
+      -- Snippets
+      { 'L3MON4D3/LuaSnip' },
+      { 'saadparwaiz1/cmp_luasnip' },
+      { 'rafamadriz/friendly-snippets' },
+    }
   }
 
   use("folke/zen-mode.nvim") -- :ZenMode
   -- use("github/copilot.vim")
   use("eandrju/cellular-automaton.nvim")
   use('nvim-tree/nvim-tree.lua') -- Dir Tree
+
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup()
+    end
+  };
+
+  -- typescript tools (like rust tools)
+  use {
+    "pmizio/typescript-tools.nvim",
+    requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    config = function()
+      require("typescript-tools").setup {}
+    end,
+  }
 
   -- This is the trouble plugin for errors & stuff.
   use {
@@ -78,6 +94,7 @@ return require('packer').startup(function(use)
       require("lsp_lines").setup()
     end,
   })
+
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   use('mfussenegger/nvim-dap')
   use('wakatime/vim-wakatime')

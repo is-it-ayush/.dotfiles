@@ -1,23 +1,18 @@
 #!/usr/bin/zsh
 
-# If STOW_FOLDERS is not set, default to stowing all folders
 if [[ -z $STOW_FOLDERS ]]; then
-    export STOW_FOLDERS="zsh,nvim,alacritty"
+    export STOW_FOLDERS="zsh,nvim,alacritty,home"
 fi
 
-# If DOTFILES is not set, default to ~/.dotfiles
 if [[ -z $DOTFILES ]]; then
     export DOTFILES=$HOME/.dotfiles
 fi
 
-# We move to the dotfiles directory.
 pushd $DOTFILES > /dev/null
-
-# Except for zsh, treat every folder as a .config folder
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
   echo "[config] Linking $folder."
-  if [[ $folder == "zsh" ]]; then
+  if [[ $folder == "zsh" || $folder == "home" ]]; then # except for zsh and home, treat every other folder for .config
     stow -t $HOME $folder
   else
     # Create directory if it doesn't exist.
@@ -27,17 +22,21 @@ do
     stow -t $HOME/.config/$folder $folder
   fi
 done
-
-# We return to the original directory
 popd > /dev/null
 
-# We setup packer for nvim to recognize lua.
+# we setup packer for nvim to recognize lua.
 PACKER_PATH=".local/share/nvim/site/pack/packer/start/packer.nvim"
-if [[ ! -e $HOME/$PACKER_PATH ]]; then
+if [[ ! -d $HOME/$PACKER_PATH ]]; then
   git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/$PACKER_PATH
   echo "[nvim] Installed packer on $PACKER_PATH"
 else
   echo "[nvim] Packer is already installed."
 fi
 
+# install some useful programs.
+if ! dpkg -l | grep -q "ripgrep"; then
+  echo "[app] ripgrep not found, installing..."
+  sudo apt-get install ripgrep
+fi
 
+echo "[config] done. :3"
