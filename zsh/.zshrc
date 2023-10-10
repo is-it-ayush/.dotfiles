@@ -9,14 +9,14 @@ export GPG_TTY=$(tty)
 
 
 # zinit, a zsh plugin manager.
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+if [[ ! -f $DOT_LOCAL/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+    command mkdir -p "$DOT_LOCAL/share/zinit" && command chmod g-rwX "$DOT_LOCAL/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$DOT_LOCAL/share/zinit/zinit.git" && \
         print -P "%F{33} %F{34}Installation successful.%f%b" || \
         print -P "%F{160} The clone has failed.%f%b"
 fi
-source $HOME/.local/share/zinit/zinit.git/zinit.zsh
+source $DOT_LOCAL/share/zinit/zinit.git/zinit.zsh
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 zinit light zsh-users/zsh-autosuggestions
@@ -27,9 +27,9 @@ zinit snippet OMZ::plugins/git/git.plugin.zsh
 # ohmyzsh thingy.
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_THEME="robbyrussell"
-zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 source $ZSH/oh-my-zsh.sh
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 DISABLE_LS_COLORS="true" # disables colors in ls
 ENABLE_CORRECTION="true" # autocorrects commands
 HIST_STAMPS="dd.mm.yyyy" # eh, time.
@@ -71,9 +71,9 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 
 # applications
-export PATH="~/bin:/home/ayush/.turso:$PATH" # turso
-export FLYCTL_INSTALL="/home/ayush/.fly" # flyctl
-export PATH="$FLYCTL_INSTALL/bin:$PATH"
-[ -s "/home/ayush/.bun/_bun" ] && source "/home/ayush/.bun/_bun" # bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+export TURSO_PATH="$HOME/.turso" # turso
+export FLYCTL_PATH="$HOME/.fly" # flyctl
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun" # bun
+export BUN_PATH="$HOME/.bun/bin"
+
+export PATH="$TURSO_PATH:$FLYCTL_PATH:$BUN_PATH:$PATH"

@@ -12,5 +12,3 @@ email = ayush.keshav2004@gmail.com
 [credential "https://gist.github.com"]
 	helper =
 	helper = !/usr/bin/gh auth git-credential
-[credential]
-	helper = libsecret
