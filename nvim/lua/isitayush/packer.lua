@@ -26,10 +26,10 @@ return require('packer').startup(function(use)
   use({ 'rose-pine/neovim', as = 'rose-pine' })
   vim.cmd('colorscheme rose-pine')
 
+
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
   use('nvim-treesitter/playground')
   use('mbbill/undotree')
-  use('tpope/vim-fugitive')
   use('laytan/cloak.nvim')
 
   -- lsp
@@ -95,7 +95,22 @@ return require('packer').startup(function(use)
     end,
   })
 
+  -- git
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
-  use('mfussenegger/nvim-dap')
+  use({
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
+  })
+
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  }
+
   use('wakatime/vim-wakatime')
 end)

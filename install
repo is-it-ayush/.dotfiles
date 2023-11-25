@@ -21,7 +21,7 @@ fi
 
 # link configurations to their original places.
 if [[ -z $STOW_FOLDERS ]]; then
-    export STOW_FOLDERS="zsh,nvim,alacritty,home"
+    export STOW_FOLDERS="zsh,nvim,alacritty,home,containers"
 fi
 
 if [[ -z $DOTFILES ]]; then
