@@ -1,6 +1,7 @@
 source ~/.dotfiles/zsh/.envrc
 source "$HOME/.cargo/env"
 source /home/ayush/.profile
+source ~/.nvm/nvm.sh
 
 
 # prompt for gpg pass via term
@@ -77,3 +78,6 @@ export FLYCTL_PATH="$HOME/.fly" # flyctl
 export BUN_PATH="$HOME/.bun/bin"
 
 export PATH="$TURSO_PATH:$FLYCTL_PATH:$BUN_PATH:$PATH"
+
+# bun completions
+[ -s "/home/ayush/.bun/_bun" ] && source "/home/ayush/.bun/_bun"

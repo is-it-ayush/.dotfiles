@@ -34,7 +34,7 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "format buffer" })
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "move selected text up" })             -- move selected text up.
 vim.keymap.set("n", "y", [["+Y]], { desc = "copy current line" });                           -- copy current line.
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selected text down" })           -- move selected text down.
-vim.keymap.set("n", "ra", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+vim.keymap.set("n", "fr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = "find and replace all within buffer" })                                           -- find and replace all wihtin file.
 vim.keymap.set("n", "J", "mzJ`z", { desc = "fold next line to current line" })               -- move the next line at the end of current line.
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "go down" })                                -- go down
