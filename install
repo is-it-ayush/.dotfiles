@@ -1,5 +1,11 @@
 #!/usr/bin/zsh
 
+# check if $HOME and $XDG_CONFIG_HOME are present.
+if [[ -z $HOME ]] then
+  echo "[env] \$HOME is not present as an env var. you gotta set the home dir before running this."
+  exit 1
+fi
+
 # install some useful programs.
 if ! dpkg -l | grep -q "ripgrep"; then
   echo "[config] ripgrep not found, installing..."
@@ -17,11 +23,15 @@ if ! dpkg -l | grep -q "zsh"; then
   echo "[config] zsh not found, installing..."
   sudo apt-get install zsh
 fi
+if ! dpkg -l | grep -q "tmux"; then
+  echo "[config] tmux not found, installing..."
+  sudo apt-get install tmux
+fi
 
 
 # link configurations to their original places.
 if [[ -z $STOW_FOLDERS ]]; then
-    export STOW_FOLDERS="zsh,nvim,alacritty,home"
+    export STOW_FOLDERS="zsh,nvim,alacritty,home,tmux"
 fi
 
 if [[ -z $DOTFILES ]]; then
@@ -50,6 +60,9 @@ if [[ ! -d $HOME/$PACKER_PATH ]]; then
   git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/$PACKER_PATH
   echo "[config] Installed packer for nvim on $PACKER_PATH"
 fi
+
+# setup tmux
+tmux source $HOME/.config/tmux/.tmux.conf
 
 
 echo "[config] done. :3"
