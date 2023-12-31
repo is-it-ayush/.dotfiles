@@ -43,6 +43,7 @@ vim.keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "select all" })               
 vim.keymap.set("n", "n", "nzzzv", { desc = "next search word" })                             -- next search word
 vim.keymap.set("n", "N", "Nzzzv", { desc = "prev search word" })                             -- prev search word
 vim.keymap.set("n", "<C-[>", "<C-T>", { noremap = true, silent = true, desc = "prev tag" }); -- prev tag
+vim.keymap.set('n', 'fe', 'za', { noremap = true, desc = "toggle text fold" })               -- fold
 
 -- fun : )
 vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>", { desc = "meme: gravity mod" })

@@ -7,6 +7,10 @@ local augroup = vim.api.nvim_create_augroup
 local isitayush_group = augroup('isitayush', {})
 local autocmd = vim.api.nvim_create_autocmd
 
+-- Fold
+vim.wo.foldmethod = "indent"
+vim.o.foldlevelstart = 99
+
 -- Autoformat on save.
 autocmd({"BufWritePre"}, {
     group = isitayush_group,
