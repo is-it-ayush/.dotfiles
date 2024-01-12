@@ -18,3 +18,4 @@ alias sudo='sudo -E env "PATH=$PATH"'
 alias lzd='lazydocker'
 alias lzg="lazygit"
 alias vms="cd /mnt/sda4/virtual_machines"
+alias cpd="pwd | xclip -sel c"

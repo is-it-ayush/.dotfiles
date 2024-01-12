@@ -31,19 +31,20 @@ end, { desc = "jump to next diagnostic" })
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "format buffer" }); -- format via lsp
 
 -- text stuff
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "move selected text up" })             -- move selected text up.
-vim.keymap.set("n", "y", [["+Y]], { desc = "copy current line" });                           -- copy current line.
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selected text down" })           -- move selected text down.
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "move selected text up" })                  -- move selected text up.
+vim.keymap.set("n", "y", [["+Y]], { desc = "copy current line" });                                -- copy current line.
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move selected text down" })                -- move selected text down.
 vim.keymap.set("n", "fr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "find and replace all within buffer" })                                           -- find and replace all wihtin file.
-vim.keymap.set("n", "J", "mzJ`z", { desc = "fold next line to current line" })               -- move the next line at the end of current line.
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "go down" })                                -- go down
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "go up" })                                  -- go up
-vim.keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "select all" })                            -- select all
-vim.keymap.set("n", "n", "nzzzv", { desc = "next search word" })                             -- next search word
-vim.keymap.set("n", "N", "Nzzzv", { desc = "prev search word" })                             -- prev search word
-vim.keymap.set("n", "<C-[>", "<C-T>", { noremap = true, silent = true, desc = "prev tag" }); -- prev tag
-vim.keymap.set('n', 'fe', 'za', { noremap = true, desc = "toggle text fold" })               -- fold
+  { desc = "find and replace all within buffer" })                                                -- find and replace all wihtin file.
+vim.keymap.set("n", "J", "mzJ`z", { desc = "fold next line to current line" })                    -- move the next line at the end of current line.
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "go down" })                                     -- go down
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "go up" })                                       -- go up
+vim.keymap.set("n", "<C-a>", "gg<S-v>G", { desc = "select all" })                                 -- select all
+vim.keymap.set("n", "n", "nzzzv", { desc = "next search word" })                                  -- next search word
+vim.keymap.set("n", "N", "Nzzzv", { desc = "prev search word" })                                  -- prev search word
+vim.keymap.set("n", "<C-[>", "<C-T>", { noremap = true, silent = true, desc = "prev tag" });      -- prev tag
+vim.keymap.set('n', 'fe', 'za', { noremap = true, desc = "toggle text fold" })                    -- fold
+vim.keymap.set('n', 'fv', '<C-v>', { noremap = true, silent = true, desc = "vim motion ctrl + v" }) -- does some stuff
 
 -- fun : )
 vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>", { desc = "meme: gravity mod" })
