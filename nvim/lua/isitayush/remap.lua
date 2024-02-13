@@ -45,6 +45,7 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "prev search word" })                
 vim.keymap.set("n", "<C-[>", "<C-T>", { noremap = true, silent = true, desc = "prev tag" });      -- prev tag
 vim.keymap.set('n', 'fe', 'za', { noremap = true, desc = "toggle text fold" })                    -- fold
 vim.keymap.set('n', 'fv', '<C-v>', { noremap = true, silent = true, desc = "vim motion ctrl + v" }) -- does some stuff
+vim.keymap.set('i', 'fh', 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false, desc = "accept copilot remap" }) -- copilot tab remap
 
 -- fun : )
 vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>", { desc = "meme: gravity mod" })

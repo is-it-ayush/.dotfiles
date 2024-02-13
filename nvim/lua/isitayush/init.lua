@@ -32,3 +32,6 @@ vim.diagnostic.config({
   virtual_text = true,
   virtual_lines = false,
 })
+
+-- tell copilot to not use tab keymap
+vim.g.copilot_no_tab_map = true

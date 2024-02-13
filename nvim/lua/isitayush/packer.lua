@@ -58,7 +58,7 @@ return require('packer').startup(function(use)
   }
 
   use("folke/zen-mode.nvim") -- :ZenMode
-  -- use("github/copilot.vim")
+  use("github/copilot.vim")
   use("eandrju/cellular-automaton.nvim")
   use('nvim-tree/nvim-tree.lua') -- Dir Tree
 
