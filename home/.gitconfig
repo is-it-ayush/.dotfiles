@@ -12,3 +12,9 @@ email = ayush.keshav2004@gmail.com
 [credential "https://gist.github.com"]
 	helper =
 	helper = !/usr/bin/gh auth git-credential
+[color]
+	ui = auto
+[maintenance]
+	auto = start
+	repo = /home/ayush/personal/serde-playground
+	repo = /home/ayush/personal/j1407b
