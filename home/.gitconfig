@@ -15,6 +15,5 @@ email = ayush.keshav2004@gmail.com
 [color]
 	ui = auto
 [maintenance]
-	auto = start
 	repo = /home/ayush/personal/serde-playground
 	repo = /home/ayush/personal/j1407b

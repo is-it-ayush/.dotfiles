@@ -40,7 +40,6 @@ HIST_STAMPS="dd.mm.yyyy" # eh, time.
 unsetopt correct_all # disables auto-correct.
 unsetopt correct
 
-
 # aliases 💙
 source ~/.dotfiles/zsh/.aliases
 
@@ -84,3 +83,38 @@ export PATH="$TURSO_PATH:$FLYCTL_PATH:$BUN_PATH:$PATH"
 
 # bun completions
 [ -s "/home/ayush/.bun/_bun" ] && source "/home/ayush/.bun/_bun"
+
+# aws-cli auto-completion
+complete -C '/usr/local/bin/aws_completer' aws
+
+# ffmpeg util to convert webm to mp4
+function webm2mp4() {
+    filename="${1%.*}"
+    outputname="$filename.mp4"
+    if test -f "$1"; then
+        printf "You chose the file: $1 \nWe'll use the name '$filename' to save it to $outputname in a moment.\n"
+        if test -f $outputname; then
+            while true; do
+                read -r -p "$outputname exists, would you like to overwrite? (Y/N): " answer
+                case $answer in
+                    [Yy]* ) ffmpeg -i "$1" -filter:v "scale=trunc(iw/2)*2:trunc(ih/2)*2,fps=30" -codec:v "libx264" "$filename".mp4; break;;
+                    [Nn]* ) printf "Not Overwriting. Please rename your file, if necessary. Exiting...\n"; return;;
+                    * ) echo "Please answer Y or N.";;
+                esac
+            done
+        elif ! test -f "$outputname"; then
+            printf "$outputname does not exist, nothing to worry about overwriting -- rendering now via ffmpeg.\n"
+            ffmpeg -i "$1" -filter:v "scale=trunc(iw/2)*2:trunc(ih/2)*2,fps=30" -codec:v "libx264" "$filename".mp4;
+        fi
+    elif ! test -f "$1"; then
+        printf "The file does not exist.\n"
+    fi
+}
+
+# pnpm
+export PNPM_HOME="/home/ayush/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
