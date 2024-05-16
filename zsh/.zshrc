@@ -1,8 +1,7 @@
-source ~/.dotfiles/zsh/.envrc
+source ~/.dotfiles/zsh/.env.sh
 source "$HOME/.cargo/env"
 source /home/ayush/.profile
 source ~/.nvm/nvm.sh
-
 
 # prompt for gpg pass via term
 GPG_TTY=$(tty)
@@ -26,8 +25,6 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit snippet OMZ::plugins/git/git.plugin.zsh
 
-
-
 # ohmyzsh thingy.
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_THEME="robbyrussell"
@@ -40,8 +37,8 @@ HIST_STAMPS="dd.mm.yyyy" # eh, time.
 unsetopt correct_all # disables auto-correct.
 unsetopt correct
 
-# aliases 💙
-source ~/.dotfiles/zsh/.aliases
+source ~/.dotfiles/zsh/.aliases.sh
+source ~/.dotfiles/zsh/.helper.sh
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
@@ -54,7 +51,6 @@ export NVM_DIR="$HOME/.nvm"
 ssh-add -l &>/dev/null
 if [ "$?" -eq 7 ]; then
     # Could not open a connection to your authentication agent.
-
     # Load stored agent connection info.
     test -r ~/.ssh-agent && \
         eval "$(<~/.ssh-agent)" >/dev/null
@@ -76,45 +72,10 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 # applications
 export TURSO_PATH="$HOME/.turso" # turso
 export FLYCTL_PATH="$HOME/.fly" # flyctl
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun" # bun
 export BUN_PATH="$HOME/.bun/bin"
 
 export PATH="$TURSO_PATH:$FLYCTL_PATH:$BUN_PATH:$PATH"
 
-# bun completions
-[ -s "/home/ayush/.bun/_bun" ] && source "/home/ayush/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun" # bun completions
+complete -C '/usr/local/bin/aws_completer' aws # aws-cli auto-completion
 
-# aws-cli auto-completion
-complete -C '/usr/local/bin/aws_completer' aws
-
-# ffmpeg util to convert webm to mp4
-function webm2mp4() {
-    filename="${1%.*}"
-    outputname="$filename.mp4"
-    if test -f "$1"; then
-        printf "You chose the file: $1 \nWe'll use the name '$filename' to save it to $outputname in a moment.\n"
-        if test -f $outputname; then
-            while true; do
-                read -r -p "$outputname exists, would you like to overwrite? (Y/N): " answer
-                case $answer in
-                    [Yy]* ) ffmpeg -i "$1" -filter:v "scale=trunc(iw/2)*2:trunc(ih/2)*2,fps=30" -codec:v "libx264" "$filename".mp4; break;;
-                    [Nn]* ) printf "Not Overwriting. Please rename your file, if necessary. Exiting...\n"; return;;
-                    * ) echo "Please answer Y or N.";;
-                esac
-            done
-        elif ! test -f "$outputname"; then
-            printf "$outputname does not exist, nothing to worry about overwriting -- rendering now via ffmpeg.\n"
-            ffmpeg -i "$1" -filter:v "scale=trunc(iw/2)*2:trunc(ih/2)*2,fps=30" -codec:v "libx264" "$filename".mp4;
-        fi
-    elif ! test -f "$1"; then
-        printf "The file does not exist.\n"
-    fi
-}
-
-# pnpm
-export PNPM_HOME="/home/ayush/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end

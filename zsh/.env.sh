@@ -33,6 +33,7 @@ export GDM_LANG=en_US
 # terminal
 export EDITOR=nvim
 export TERM="alacritty"
+export TERM_PROGRAM="alacritty"
 export TERMINAL="$LOCAL/bin/alacritty"
 
 
