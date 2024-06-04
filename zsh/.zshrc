@@ -66,8 +66,11 @@ ssh-add -l &>/dev/null
 if [ $? -eq 6 ]; then
     ssh-add -t 9h
 fi
-fpath+=${ZDOTDIR:-~}/.zsh_functions
 
+# enable autocompletion
+fpath+=$HOME/.zsh_functions
+autoload -Uz compinit
+compinit
 
 # applications
 export TURSO_PATH="$HOME/.turso" # turso
@@ -78,4 +81,3 @@ export PATH="$TURSO_PATH:$FLYCTL_PATH:$BUN_PATH:$PATH"
 
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun" # bun completions
 complete -C '/usr/local/bin/aws_completer' aws # aws-cli auto-completion
-
