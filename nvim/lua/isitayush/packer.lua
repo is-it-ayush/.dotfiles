@@ -1,14 +1,24 @@
 -- Only required if you have packer configured as `opt`
 vim.cmd([[packadd packer.nvim]])
 
+-- Ensure that packer is installed
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
 return require("packer").startup(function(use)
   -- core plugins
   use("wbthomason/packer.nvim") -- load packer
-  use({
-    "nvim-telescope/telescope.nvim",
-    tag = "0.1.1",
-    requires = { { "nvim-lua/plenary.nvim" } },
-  })                                                            -- fuzzy finder for files, buffers, etc.
+  use("nvim-telescope/telescope.nvim", { tag = "0.1.4" })           -- fuzzy finder for files, buffers, etc.
   use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" }) -- syntax highlighting & stuff
   use({
     "VonHeikemen/lsp-zero.nvim",
@@ -33,7 +43,7 @@ return require("packer").startup(function(use)
       { "rafamadriz/friendly-snippets" },
     },
   }) -- ide like lsp features
-  use({
+use({
     "pmizio/typescript-tools.nvim",
     requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     config = function()

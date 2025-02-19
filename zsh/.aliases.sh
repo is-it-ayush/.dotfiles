@@ -18,7 +18,7 @@ alias ncg="npm list -g --depth=0 | cut -d ' ' -f 2 | tail -n +2 | tr '\n\r' ' ' 
 alias sudo='sudo -E env "PATH=$PATH"'
 alias lzd='lazydocker'
 alias lzg="lazygit"
-alias vms="cd /mnt/sda4/virtual_machines"
+alias vms="cd $EXTRA_STORAGE/virtual_machines"
 alias recs="cd ~/Videos/Screencasts/"
-alias cpd="pwd | xclip -sel c"
+alias cwd="pwd | xclip -sel c"
 alias ssh="TERM=xterm-256color $(which ssh)"

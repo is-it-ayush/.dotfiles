@@ -1,15 +1,18 @@
 source ~/.dotfiles/zsh/.env.sh
-source "$HOME/.cargo/env"
-source /home/ayush/.profile
+source ~/.cargo/env
+source ~/.profile
 source ~/.nvm/nvm.sh
+source ~/.aliases.sh
+source ~/.helper.sh
 
 # prompt for gpg pass via term
 GPG_TTY=$(tty)
 export GPG_TTY=$(tty)
 
+# unbind alacritty key for use in tmux
 bindkey -r "^X^[[Z" # shift + tab
 
-# zinit, a zsh plugin manager.
+# init zinit
 if [[ ! -f $DOT_LOCAL/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{38} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
     command mkdir -p "$DOT_LOCAL/share/zinit" && command chmod g-rwX "$DOT_LOCAL/share/zinit"
@@ -25,8 +28,8 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit snippet OMZ::plugins/git/git.plugin.zsh
 
-# ohmyzsh thingy.
-export ZSH="$HOME/.oh-my-zsh"
+# init omz.
+export ZSH=~/.oh-my-zsh
 export ZSH_THEME="robbyrussell"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 source $ZSH/oh-my-zsh.sh
@@ -36,14 +39,6 @@ ENABLE_CORRECTION="true" # autocorrects commands
 HIST_STAMPS="dd.mm.yyyy" # eh, time.
 unsetopt correct_all # disables auto-correct.
 unsetopt correct
-
-source ~/.dotfiles/zsh/.aliases.sh
-source ~/.dotfiles/zsh/.helper.sh
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # ssh sessions to prevent reprompting of passwords.
 # https://stackoverflow.com/a/48509430/13266368
@@ -67,17 +62,22 @@ if [ $? -eq 6 ]; then
     ssh-add -t 9h
 fi
 
-# enable autocompletion
+# prevent shell exit on control+D
+setopt ignoreeof
+
+# applications.
+export NVM_DIR=~/.nvm
+export TURSO_PATH=~/.turso # turso
+export FLYCTL_PATH=~/.fly # flyctl
+export BUN_PATH=~/.bun/bin
+export PATH="$TURSO_PATH:$FLYCTL_PATH:$BUN_PATH:$PATH"
+
+
+# autocompletions.
 fpath+=$HOME/.zsh_functions
 autoload -Uz compinit
 compinit
-
-# applications
-export TURSO_PATH="$HOME/.turso" # turso
-export FLYCTL_PATH="$HOME/.fly" # flyctl
-export BUN_PATH="$HOME/.bun/bin"
-
-export PATH="$TURSO_PATH:$FLYCTL_PATH:$BUN_PATH:$PATH"
-
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun" # bun completions
 complete -C '/usr/local/bin/aws_completer' aws # aws-cli auto-completion

@@ -15,9 +15,9 @@ LC_CTYPE = "en_US.UTF-8"
 
 [window]
 dynamic_padding=false
-decorations="Full"
+decorations="None"
 opacity=0.8
-padding={x = 5, y = 0}
+padding={x = 0, y = 0}
 startup_mode="Maximized"
 
 [font]

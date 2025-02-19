@@ -3,17 +3,11 @@
 # Please adapt and uncomment the following lines:
 name = Ayush Gupta
 email = ayush.keshav2004@gmail.com
-	signingkey = 752E6D3E149DE364
 [commit]
-	gpgsign = true
+  gpgsign = true # expect system level signing key is set.
 [credential "https://github.com"]
-	helper =
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper =
 	helper = !/usr/bin/gh auth git-credential
 [color]
 	ui = auto
-[maintenance]
-	repo = /home/ayush/personal/serde-playground
-	repo = /home/ayush/personal/j1407b

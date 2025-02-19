@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/bin/bash
 
 # check if $HOME and $XDG_CONFIG_HOME are present.
 if [[ -z $HOME ]] then
@@ -7,62 +7,46 @@ if [[ -z $HOME ]] then
 fi
 
 # install some useful programs.
-if ! dpkg -l | grep -q "ripgrep"; then
-  echo "[config] ripgrep not found, installing..."
-  sudo apt-get install ripgrep
-fi
-if ! dpkg -l | grep -q "git"; then
-  echo "[config] git not found, installing..."
-  sudo apt-get install git
-fi
-if ! dpkg -l | grep -q "stow"; then
-  echo "[config] stow not found, installing..."
-  sudo apt-get install stow
-fi
-if ! dpkg -l | grep -q "zsh"; then
-  echo "[config] zsh not found, installing..."
-  sudo apt-get install zsh
-fi
-if ! dpkg -l | grep -q "tmux"; then
-  echo "[config] tmux not found, installing..."
-  sudo apt-get install tmux
-fi
-
-
-# link configurations to their original places.
-if [[ -z $STOW_FOLDERS ]]; then
-    export STOW_FOLDERS="zsh,nvim,alacritty,home,tmux"
-fi
-
-if [[ -z $DOTFILES ]]; then
-    export DOTFILES=$HOME/.dotfiles
-fi
-pushd $DOTFILES > /dev/null
-for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
-do
-  if [[ $folder == "zsh" || $folder == "home" ]]; then # except for zsh and home, treat every other folder for .config
-    echo "[config] Linking $folder/* to $HOME."
-    stow -t $HOME $folder
-  else
-    if [[ ! -d $HOME/.config/$folder ]]; then
-      mkdir $HOME/.config/$folder
+function ensure_programs() {
+  local programs="ripgrep,git,stow,zsh,tmux"
+  for program in ${programs//,/ }
+  do
+    if ! dpkg -l | grep -q $program; then
+      echo "[config] $program is not found, installing..."
+      sudo apt-get install $program
+    else
+      echo "[config] $program found, skipping install..."
     fi
-    echo "[config] Linking $folder/* to $HOME/.config/$folder."
-    stow -t $HOME/.config/$folder $folder
+  done
+}
+# place config files.
+function stow_config_files() {\
+  local stow_folders="zsh,nvim,alacritty,home,tmux"
+  for folder in ${stow_folders//,/ }
+  do
+    if [[ $folder == "zsh" || $folder == "home" ]]; then # except for zsh and home, treat every other folder for .config
+      echo "[config] linking $folder/* to $HOME."
+      stow -t $HOME $folder
+    else
+      if [[ ! -d $HOME/.config/$folder ]]; then
+        mkdir $HOME/.config/$folder
+      fi
+      echo "[config] linking $folder/* to $HOME/.config/$folder."
+      stow -t $HOME/.config/$folder $folder
+    fi
+  done
+}
+# ensure packer is installed
+function setup_packer() {
+  local packer_path="$DOT_LOCAL/share/nvim/site/pack/packer/start/packer.nvim"
+  if [[ ! -d ${packer_path} ]]; then
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim ${packer_path}
+    echo "[config] Installed packer for nvim on ${packer_path}"
   fi
-done
-popd > /dev/null
+}
 
-
-# setup packer for nvim.
-PACKER_PATH=".local/share/nvim/site/pack/packer/start/packer.nvim"
-if [[ ! -d $HOME/$PACKER_PATH ]]; then
-  git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/$PACKER_PATH
-  echo "[config] Installed packer for nvim on $PACKER_PATH"
-fi
-
-# setup tmux
-tmux source $HOME/.config/tmux/.tmux.conf
-
-
+ensure_programs
+stow_config_files
+setup_packer
+tmux source ~/.config/tmux/tmux.conf
 echo "[config] done. :3"
