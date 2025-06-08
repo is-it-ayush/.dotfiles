@@ -4,9 +4,9 @@ vim.cmd([[packadd packer.nvim]])
 -- Ensure that packer is installed
 local ensure_packer = function()
   local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
     vim.cmd [[packadd packer.nvim]]
     return true
   end
@@ -17,33 +17,22 @@ local packer_bootstrap = ensure_packer()
 
 return require("packer").startup(function(use)
   -- core plugins
-  use("wbthomason/packer.nvim") -- load packer
-  use("nvim-telescope/telescope.nvim", { tag = "0.1.4" })           -- fuzzy finder for files, buffers, etc.
+  use("wbthomason/packer.nvim")                                 -- load packer
+  use("nvim-telescope/telescope.nvim", { tag = "0.1.4" })       -- fuzzy finder for files, buffers, etc.
   use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" }) -- syntax highlighting & stuff
   use({
-    "VonHeikemen/lsp-zero.nvim",
-    branch = "v2.x",
+    "neovim/nvim-lspconfig",
     requires = {
-      -- LSP Support
-      { "neovim/nvim-lspconfig" },
-      { "williamboman/mason.nvim" },
-      { "williamboman/mason-lspconfig.nvim" },
-      { "simrat39/rust-tools.nvim" }, -- for rust.
-
-      -- Autocompletion
-      { "hrsh7th/nvim-cmp" },
-      { "hrsh7th/cmp-buffer" },
-      { "hrsh7th/cmp-path" },
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "hrsh7th/cmp-nvim-lua" },
-
-      -- Snippets
-      { "L3MON4D3/LuaSnip" },
-      { "saadparwaiz1/cmp_luasnip" },
-      { "rafamadriz/friendly-snippets" },
+      "williamboman/mason.nvim",           -- manage lsp servers
+      "williamboman/mason-lspconfig.nvim", -- lsp server config
+      "hrsh7th/nvim-cmp",                  -- completion engine
+      "hrsh7th/cmp-nvim-lsp",              -- lsp completion source
+      "hrsh7th/cmp-buffer",                -- buffer completion
+      "hrsh7th/cmp-path",                  -- path completion
+      "L3MON4D3/LuaSnip",                  -- snippet engine
     },
-  }) -- ide like lsp features
-use({
+  })
+  use({
     "pmizio/typescript-tools.nvim",
     requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     config = function()
@@ -71,12 +60,6 @@ use({
   use("laytan/cloak.nvim")               -- stuff in env files
   use("github/copilot.vim")              -- ai suggestions
   use("eandrju/cellular-automaton.nvim") -- fun stuff
-  use({
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
-    end,
-  }) -- display colors from hex codes
   use({
     "ahmedkhalf/project.nvim",
     config = function()

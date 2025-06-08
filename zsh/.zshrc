@@ -68,10 +68,11 @@ setopt ignoreeof
 # applications.
 export NVM_DIR=~/.nvm
 export TURSO_PATH=~/.turso # turso
-export FLYCTL_PATH=~/.fly # flyctl
+export FLYCTL_PATH=~/.fly/bin # flyctl
 export BUN_PATH=~/.bun/bin
-export PATH="$TURSO_PATH:$FLYCTL_PATH:$BUN_PATH:$PATH"
-
+export ANDROID_STUDIO_PATH=$EXTRA_STORAGE/tools/android-studio/bin
+export ANDROID_HOME="$HOME/Android/Sdk"
+export PATH="$TURSO_PATH:$FLYCTL_PATH:$BUN_PATH:$ANDROID_STUDIO_PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$PATH"
 
 # autocompletions.
 fpath+=$HOME/.zsh_functions
