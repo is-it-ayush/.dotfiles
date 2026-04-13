@@ -1,4 +1,3 @@
--- Only required if you have packer configured as `opt`
 vim.cmd([[packadd packer.nvim]])
 
 -- Ensure that packer is installed
@@ -13,53 +12,31 @@ local ensure_packer = function()
   return false
 end
 
-local packer_bootstrap = ensure_packer()
+ensure_packer()
 
 return require("packer").startup(function(use)
-  -- core plugins
-  use("wbthomason/packer.nvim")                                 -- load packer
-  use("nvim-telescope/telescope.nvim", { tag = "0.1.4" })       -- fuzzy finder for files, buffers, etc.
-  use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" }) -- syntax highlighting & stuff
+  -- core
+  use("wbthomason/packer.nvim")
+
+  -- ui
+  use({ "rose-pine/neovim", as = "rose-pine" })
+  use("nvim-tree/nvim-tree.lua")
   use({
-    "neovim/nvim-lspconfig",
-    requires = {
-      "williamboman/mason.nvim",           -- manage lsp servers
-      "williamboman/mason-lspconfig.nvim", -- lsp server config
-      "hrsh7th/nvim-cmp",                  -- completion engine
-      "hrsh7th/cmp-nvim-lsp",              -- lsp completion source
-      "hrsh7th/cmp-buffer",                -- buffer completion
-      "hrsh7th/cmp-path",                  -- path completion
-      "L3MON4D3/LuaSnip",                  -- snippet engine
-    },
-  })
-  use({
-    "pmizio/typescript-tools.nvim",
-    requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    "catgoose/nvim-colorizer.lua",
     config = function()
-      require("typescript-tools").setup({})
+      require("colorizer").setup()
     end,
-  }) -- replacement for typescript-language-server
+  })
   use({
     "folke/trouble.nvim",
     requires = "nvim-tree/nvim-web-devicons",
     config = function()
-      require("trouble").setup({
-        icon = false,
-      })
+      require("trouble").setup({})
     end,
-  })                                                                    -- pretty diagnostics list
-  use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" }) -- git in nvim
-  use("mbbill/undotree")                                                -- helps u go back in time
-  use("nvim-tree/nvim-tree.lua")                                        -- file tree
-  use({ "L3MON4D3/LuaSnip", run = "make install_jsregexp" })            -- snippets
+  })
 
-  -- theme plugin
-  use({ "rose-pine/neovim", as = "rose-pine" }) -- nvim theme
-
-  -- other plugins
-  use("laytan/cloak.nvim")               -- stuff in env files
-  use("github/copilot.vim")              -- ai suggestions
-  use("eandrju/cellular-automaton.nvim") -- fun stuff
+  -- navigation
+  use("nvim-telescope/telescope.nvim")
   use({
     "ahmedkhalf/project.nvim",
     config = function()
@@ -69,18 +46,89 @@ return require("packer").startup(function(use)
         patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile" },
       })
     end,
-  }) -- switch between git projects
+  })
+
+  -- tree
   use({
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    run = ":TSUpdate",
+  })
+
+  -- lsp + completion
+  use({
+    "neovim/nvim-lspconfig",
+    requires = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+
+      -- completion
+      "hrsh7th/nvim-cmp",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+
+      -- snippets
+      "L3MON4D3/LuaSnip",
+    },
+  })
+
+  use({
+    "pmizio/typescript-tools.nvim",
+    requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     config = function()
-      require("lsp_lines").setup()
+      require("typescript-tools").setup({
+        server = {
+          on_attach = function(client, bufnr)
+          end,
+        },
+      })
     end,
-  }) -- use diagnostic lines to show errors
+  })
+
+  -- edit
   use({
     "numToStr/Comment.nvim",
     config = function()
       require("Comment").setup()
     end,
-  })                           -- comment stuff
-  use("wakatime/vim-wakatime") -- track time spent in nvim
+  })
+  use("mbbill/undotree")
+
+  -- git
+  use({
+    "TimUntersberger/neogit",
+    requires = "nvim-lua/plenary.nvim",
+  })
+
+  -- latex
+  use({
+    "lervag/vimtex",
+    config = function()
+      vim.g.vimtex_view_method = "zathura"
+      vim.g.vimtex_compiler_method = "latexmk"
+      vim.g.vimtex_compiler_latexmk = {
+        options = {
+          "-interaction=nonstopmode",
+          "-synctex=1",
+        },
+      }
+    end,
+  })
+
+  -- utils
+  use("laytan/cloak.nvim")
+  use("wakatime/vim-wakatime")
+  use({
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  })
+
+  -- fun
+  use("github/copilot.vim")
+  use("eandrju/cellular-automaton.nvim")
+
+  use({ "L3MON4D3/LuaSnip", run = "make install_jsregexp" })
 end)

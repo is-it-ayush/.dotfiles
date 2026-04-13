@@ -63,6 +63,34 @@ vim.lsp.config('basedpyright', {
   }
 })
 
+-- tailwindcss setup
+vim.lsp.config('tailwindcss', {
+  settings = {
+    tailwindCSS = {
+      experimental = {
+        classRegex = {
+          "tw`([^`]*)", -- tw`...`
+          "tw\\.\\w+`([^`]*)", -- tw.xxx`...`
+          "tw\\(.*?\\)`([^`]*)", -- tw(...)`...`
+          "styled\\(.*?\\)`([^`]*)", -- styled(...)`...`
+          "clsx\\(([^)]*)\\)", -- clsx(...)
+          "classnames\\(([^)]*)\\)", -- classnames(...)
+          "cva\\(([^)]*)\\)", -- cva(...)
+        },
+      },
+    },
+  },
+})
+
+vim.lsp.config('hdl_checker', {
+  cmd = { 'hdl_checker', '--lsp' },
+  filetypes = { 'verilog', 'systemverilog', 'vhdl' },
+  root_dir = function(fname)
+    return vim.fs.dirname(vim.fs.find({ '.hdl_checker.json' }, { upward = true, path = fname })[1])
+  end,
+  capabilities = lsp_capabilities,
+})
+
 -- completion setup
 local cmp = require('cmp')
 cmp.setup({

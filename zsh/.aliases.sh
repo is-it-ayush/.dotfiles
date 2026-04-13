@@ -19,6 +19,10 @@ alias sudo='sudo -E env "PATH=$PATH"'
 alias lzd='lazydocker'
 alias lzg="lazygit"
 alias vms="cd $EXTRA_STORAGE/virtual_machines"
+alias tools="cd $EXTRA_STORAGE/tools"
 alias recs="cd ~/Videos/Screencasts/"
 alias cwd="pwd | xclip -sel c"
 alias ssh="TERM=xterm-256color $(which ssh)"
+alias rand="openssl rand --base64"
+alias update="sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y"
+alias paraview="LD_LIBRARY_PATH=$PARAVIEW_LIBS:$LD_LIBRARY_PATH paraview"

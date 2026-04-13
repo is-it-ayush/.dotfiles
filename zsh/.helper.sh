@@ -21,25 +21,6 @@ function webm2mp4() {
         printf "the file does not exist.\n"
     fi
 }
-
-# helper functions to start the appimages in the background.
-# does so by piping the output to /dev/null
-# takes in a --debug arg to not pipe the output to null.
-# the binaries are still tied to the executing process.
-# thus closing the shell will close the appimage.
-function freecad() {
-  if [ -z "$LOCAL/bin/freecad" ]; then
-    echo "FreeCAD is not installed. You gotta install it first. The binary should be present in $LOCAL"
-  else
-    chmod u+x $LOCAL/bin/freecad
-    if [[ "$1" == "--debug" ]]; then
-      $LOCAL/bin/freecad
-    else
-      echo 'starting FreeCAD in the background! :3'
-      nohup $LOCAL/bin/freecad > /dev/null 2>&1 &
-    fi
-  fi
-}
 function obsidian() {
   if [ -z "$LOCAL/bin/obsidian" ]; then
     echo "Obsidian is not installed. You gotta install it first. The binary should be present in $LOCAL"
@@ -63,6 +44,32 @@ function fritzing() {
     else
       echo 'starting Fritzing in the background! :3'
       nohup $LOCAL/bin/fritzing > /dev/null 2>&1 &
+    fi
+  fi
+}
+function freecad() {
+  if [ -z "$LOCAL/bin/freecad" ]; then
+    echo "Freecad is not installed. You gotta install it first. The binary should be present in $LOCAL"
+  else
+    chmod +x $LOCAL/bin/freecad
+    if [[ "$1" == "--debug" ]]; then
+      $LOCAL/bin/freecad
+    else
+      echo 'starting Freecad in the background! :3'
+      nohup $LOCAL/bin/freecad > /dev/null 2>&1 &
+    fi
+  fi
+}
+function vesta() {
+  if [ -z "$EXTRA_STORAGE/tools/vesta/VESTA" ]; then
+    echo "VESTA is not installed. You gotta install it first. The binary should be present in $EXTRA_STORAGE/tools/vesta/VESTA"
+  else
+    chmod +x $EXTRA_STORAGE/tools/vesta/VESTA
+    if [[ "$1" == "--debug" ]]; then
+      $EXTRA_STORAGE/tools/vesta/VESTA
+    else
+      echo 'starting VESTA in the background! :3'
+      nohup $EXTRA_STORAGE/tools/vesta/VESTA > /dev/null 2>&1 &
     fi
   fi
 }

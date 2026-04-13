@@ -22,7 +22,7 @@ vim.keymap.set("n", "<C-q>", ":NvimTreeToggle<cr>", { silent = true, noremap = t
 -- toggle things
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "toggle undo tree" })                  -- toggle undo tree
 vim.keymap.set("", "<leader>l", require("lsp_lines").toggle, { desc = "toggle lsp lines" })              -- toggle lsp lines.
-vim.keymap.set("n", "<leader>tt", "<cmd>:Trouble diagnostics<CR>", { silent = true, desc = "toggle trouble" }) -- toogle trouble
+vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics toggle<CR>", { silent = true, desc = "Toggle trouble" })
 
 -- lsp
 vim.keymap.set("n", "<C-j>", function() -- jump to next problem

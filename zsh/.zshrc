@@ -70,9 +70,40 @@ export NVM_DIR=~/.nvm
 export TURSO_PATH=~/.turso # turso
 export FLYCTL_PATH=~/.fly/bin # flyctl
 export BUN_PATH=~/.bun/bin
-export ANDROID_STUDIO_PATH=$EXTRA_STORAGE/tools/android-studio/bin
+export OPENEMS_PATH="$HOME/opt/openEMS/bin"
+export GMSH_PATH="$EXTRA_STORAGE/tools/gmsh/bin"
+export GHIDRA_PATH="$EXTRA_STORAGE/tools/ghidra"
+export OSS_CAD_PATH="$EXTRA_STORAGE/tools/oss_cad/bin"
+export RISCV32_PATH="/opt/riscv32/bin"
+export PARAVIEW_PATH="$EXTRA_STORAGE/tools/paraview/bin"
+export KITTY_PATH="$DOT_LOCAL/kitty.app/bin"
+export TOOL_PATHS=$TURSO_PATH:$FLYCTL_PATH:$BUN_PATH:$ANDROID_STUDIO_PATH:$OPENEMS_PATH:$GMSH_PATH:$GHIDRA_PATH:$RISCV32_PATH:$OSS_CAD_PATH:$PARAVIEW_PATH:$KITTY_PATH
+
+export ANDROID_STUDIO_PATH="$EXTRA_STORAGE/tools/android-studio/bin"
 export ANDROID_HOME="$HOME/Android/Sdk"
-export PATH="$TURSO_PATH:$FLYCTL_PATH:$BUN_PATH:$ANDROID_STUDIO_PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$PATH"
+export ANDROID_PATHS="$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools"
+
+export NVHPC_CUDA_HOME="$EXTRA_STORAGE/tools/hpc/Linux_x86_64/23.9/cuda"
+export NVHPC_CUDA_PATH="$NVHPC_CUDA_HOME/bin"
+export NVHPC_PATH="$EXTRA_STORAGE/tools/hpc/Linux_x86_64/23.9/compilers/bin"
+export MPI_PATH="$EXTRA_STORAGE/tools/hpc/Linux_x86_64/23.9/comm_libs/mpi/bin"
+export HPC_PATHS="$MPI_PATH:$NVHPC_PATH:$NVHPC_CUDA_PATH:$NVHPC_CUDA_HOME"
+
+export PATH=$TOOL_PATHS:$ANDROID_PATHS:$HPC_PATHS:$PATH
+
+# library paths.
+export NVHPC_CUDA_LIBS="$NVHPC_CUDA_HOME/lib64"
+export NVHPC_COMPILER_LIBS="$EXTRA_STORAGE/tools/hpc/Linux_x86_64/23.9/compilers/lib"
+export PARAVIEW_LIBS="$EXTRA_STORAGE/tools/paraview/lib"
+# export OMPI_LIBS="$EXTRA_STORAGE/tools/hpc/Linux_x86_64/23.9/comm_libs/mpi/lib"
+export LINUX_LIBS="/usr/local/lib:/usr/lib/x86_64-linux-gnu"
+
+export LD_LIBRARY_PATH=$LINUX_LIBS:$LD_LIBRARY_PATH:$OMPI_LIBS:$NVHPC_COMPILER_LIBS:$NVHPC_CUDA_LIBS:$PARAVIEW_LIBS
+
+# man paths.
+export NVHPC_MAN="$EXTRA_STORAGE/tools/hpc/Linux_x86_64/23.9/compilers/man"
+export MPI_MAN="$EXTRA_STORAGE/tools/hpc/Linux_x86_64/23.9/comm_libs/mpi/share/man"
+export MANPATH="$NVHPC_MAN:$MPI_MAN:$MANPATH"
 
 # autocompletions.
 fpath+=$HOME/.zsh_functions

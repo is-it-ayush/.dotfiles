@@ -3,22 +3,21 @@ require("isitayush.packer")
 require("isitayush.set")
 require("isitayush.helpers")
 
-local augroup = vim.api.nvim_create_augroup
-local isitayush_group = augroup('isitayush', {})
-local autocmd = vim.api.nvim_create_autocmd
+local isitayush_group = vim.api.nvim_create_augroup('isitayush', {})
 
--- Fold
-vim.wo.foldmethod = "indent"
-vim.o.foldlevelstart = 99
+-- fold
+-- vim.wo.foldmethod = "indent"
+-- vim.o.foldlevelstart = 99
 
--- Autoformat on save.
-autocmd({"BufWritePre"}, {
+
+-- autoformat on save
+vim.api.nvim_create_autocmd({"BufWritePre"}, {
     group = isitayush_group,
     pattern = "*",
     command = [[%s/\s\+$//e]],
 })
 
--- Some netrw settings. (disabled in favor of nvim-tree)
+-- netrw settings. (disabled in favor of nvim-tree)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.netrw_browse_split = 0
@@ -35,3 +34,4 @@ vim.diagnostic.config({
 
 -- tell copilot to not use tab keymap
 vim.g.copilot_no_tab_map = true
+

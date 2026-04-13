@@ -8,4 +8,31 @@ vim.keymap.set('n', '<leader>sw', ':Telescope projects<CR>', { desc = "switch pr
 vim.keymap.set('n', '<leader>vh', ':Telescope keymaps<CR>', { desc = "open keymap help" });
 vim.keymap.set('n', '<leader>man', ':Telescope man_pages<CR>', { desc = "open manual pages" });
 
+require('telescope').setup {
+  defaults = {
+    preview = {
+      treesitter = false,
+    },
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--hidden",
+      "--glob=!.git/*",
+      "--glob=!node_modules/*",
+      "--glob=!vendor/*",
+      "--glob=!dist/*",
+      "--glob=!build/*",
+      "--glob=!*.log",
+      "--glob=!*.lock",
+      "--glob=!*.tmp",
+      "--glob=!*.cache",
+      "--glob=!*-lock.yaml"
+    },
+  },
+}
 require('telescope').load_extension('projects')

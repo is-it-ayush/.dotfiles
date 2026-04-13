@@ -21,7 +21,7 @@ function ensure_programs() {
 }
 # place config files.
 function stow_config_files() {\
-  local stow_folders="zsh,nvim,alacritty,home,tmux"
+  local stow_folders="zsh,nvim,alacritty,home,wezterm,kitty"
   for folder in ${stow_folders//,/ }
   do
     if [[ $folder == "zsh" || $folder == "home" ]]; then # except for zsh and home, treat every other folder for .config
@@ -48,5 +48,5 @@ function setup_packer() {
 ensure_programs
 stow_config_files
 setup_packer
-tmux source ~/.config/tmux/tmux.conf
+# tmux source ~/.config/tmux/tmux.conf
 echo "[config] done. :3"
