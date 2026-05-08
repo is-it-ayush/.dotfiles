@@ -127,7 +127,7 @@ return require("packer").startup(function(use)
   })
 
   -- fun
-  use("github/copilot.vim")
+  -- use("github/copilot.vim")
   use("eandrju/cellular-automaton.nvim")
 
   use({ "L3MON4D3/LuaSnip", run = "make install_jsregexp" })
