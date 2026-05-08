@@ -16,13 +16,16 @@ export TMPDIR="$EXTRA_STORAGE/tmp" # general tmp dir
 export CONTAINER_SSHKEY="$SSH_KEY"
 export MANPATH="$LOCAL/man:$MANPATH" # manual
 export WINEPREFIX="/media/ayush/secondary/games/wine/prefixes/default/win64"
-export OLLAMA_MODELS="/home/ayush/personal/ollama"
+export OLLAMA_MODELS="/media/ayush/secondary1/models"
 export DISABLE_AUTO_TITLE='true'
 
 # lang. (some of the variables don't update automatically under locale, thus we manually override)
 export LANG="hi_IN.UTF-8"
-export LANGUAGE="hi_IN:hi"
-export LC_ALL="hi_IN.UTF-8"
+export LANGUAGE="hi_IN:hi:en_IN:en"
+export LC_TIME="hi_IN.UTF-8"        # clock in Hindi
+export LC_MESSAGES="hi_IN.UTF-8"    # UI strings in Hindi
+export LC_NUMERIC="en_IN.UTF-8"     # sane number formatting
+export LC_MONETARY="en_IN.UTF-8"    # currency formatting
 
 export GTK_IM_MODULE=ibus
 export QT_IM_MODULE=ibus

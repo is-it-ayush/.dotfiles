@@ -95,10 +95,11 @@ export PATH=$TOOL_PATHS:$ANDROID_PATHS:$HPC_PATHS:$PATH
 export NVHPC_CUDA_LIBS="$NVHPC_CUDA_HOME/lib64"
 export NVHPC_COMPILER_LIBS="$EXTRA_STORAGE/tools/hpc/Linux_x86_64/23.9/compilers/lib"
 export PARAVIEW_LIBS="$EXTRA_STORAGE/tools/paraview/lib"
+export TOKEN_LIBS="/usr/lib/WatchData/ProxKey/lib:/usr/lib/WatchData/pcsc"
 # export OMPI_LIBS="$EXTRA_STORAGE/tools/hpc/Linux_x86_64/23.9/comm_libs/mpi/lib"
 export LINUX_LIBS="/usr/local/lib:/usr/lib/x86_64-linux-gnu"
 
-export LD_LIBRARY_PATH=$LINUX_LIBS:$LD_LIBRARY_PATH:$OMPI_LIBS:$NVHPC_COMPILER_LIBS:$NVHPC_CUDA_LIBS:$PARAVIEW_LIBS
+export LD_LIBRARY_PATH=$LINUX_LIBS:$LD_LIBRARY_PATH:$OMPI_LIBS:$NVHPC_COMPILER_LIBS:$NVHPC_CUDA_LIBS:$PARAVIEW_LIBS:$TOKEN_LIBS
 
 # man paths.
 export NVHPC_MAN="$EXTRA_STORAGE/tools/hpc/Linux_x86_64/23.9/compilers/man"
