@@ -82,6 +82,8 @@ export TOOL_PATHS=$TURSO_PATH:$FLYCTL_PATH:$BUN_PATH:$ANDROID_STUDIO_PATH:$OPENE
 export ANDROID_STUDIO_PATH="$EXTRA_STORAGE/tools/android-studio/bin"
 export ANDROID_HOME="$HOME/Android/Sdk"
 export ANDROID_PATHS="$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools"
+export ANDROID_AVD_HOME="$HOME/.config/.android/avd"
+export ANDROID_SDK_HOME="$HOME/.config/.android"
 
 export NVHPC_CUDA_HOME="$EXTRA_STORAGE/tools/hpc/Linux_x86_64/23.9/cuda"
 export NVHPC_CUDA_PATH="$NVHPC_CUDA_HOME/bin"

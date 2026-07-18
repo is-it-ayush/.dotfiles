@@ -94,6 +94,55 @@ return require("packer").startup(function(use)
     end,
   })
   use("mbbill/undotree")
+  use { "stevearc/conform.nvim", config = function()
+    require("conform").setup({
+      formatters_by_ft = {
+        ["*"] = { "prettierd" },
+      },
+    })
+  end }
+
+  -- helpers
+  use({
+    "zbirenbaum/copilot.lua",
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+        },
+        panel = { enabled = false }, -- disable panel, use chat instead
+        filetypes = {
+          markdown = true,
+          help = false,
+        },
+      })
+    end,
+  })
+  use({
+    "CopilotC-Nvim/CopilotChat.nvim",
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+    },
+    run = "make tiktoken",
+    config = function()
+      require("CopilotChat").setup({
+        window = {
+          layout = "vertical",
+          width  = math.floor(vim.o.columns * 0.3),
+          row    = 1,
+          col    = vim.o.columns - math.floor(vim.o.columns * 0.3),
+          title  = "Copilot Chat",
+        },
+        mappings = {
+          submit_prompt = {
+            normal = "zs",
+            insert = "zs",
+          },
+        },
+      })
+    end,
+  })
 
   -- git
   use({
@@ -111,8 +160,10 @@ return require("packer").startup(function(use)
         options = {
           "-interaction=nonstopmode",
           "-synctex=1",
+          "-max-print-line=1000"
         },
       }
+      vim.g.vimtex_mappings_enabled = 1
     end,
   })
 

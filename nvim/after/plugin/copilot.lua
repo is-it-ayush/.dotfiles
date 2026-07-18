@@ -1,0 +1,6 @@
+local suggestion = require("copilot.suggestion")
+vim.keymap.set("i", "zz", suggestion.accept, { desc = "Copilot accept" })
+vim.keymap.set("i", "zl", suggestion.accept_word, { desc = "Copilot accept word" })
+vim.keymap.set("i", "zj", suggestion.next, { desc = "Copilot next" })
+vim.keymap.set("i", "zk", suggestion.prev, { desc = "Copilot prev" })
+vim.keymap.set("i", "zd", suggestion.dismiss, { desc = "Copilot dismiss" })

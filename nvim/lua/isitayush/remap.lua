@@ -20,8 +20,8 @@ vim.keymap.set("n", "<leader>lg", "<cmd>:LazyGit<cr>", { desc = "open lazygit" }
 vim.keymap.set("n", "<C-q>", ":NvimTreeToggle<cr>", { silent = true, noremap = true, desc = "toggle directory tree" }) -- dir tree
 
 -- toggle things
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "toggle undo tree" })                  -- toggle undo tree
-vim.keymap.set("", "<leader>l", require("lsp_lines").toggle, { desc = "toggle lsp lines" })              -- toggle lsp lines.
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "toggle undo tree" })     -- toggle undo tree
+vim.keymap.set("", "<leader>l", require("lsp_lines").toggle, { desc = "toggle lsp lines" }) -- toggle lsp lines.
 vim.keymap.set("n", "<leader>tt", "<cmd>Trouble diagnostics toggle<CR>", { silent = true, desc = "Toggle trouble" })
 
 -- lsp
@@ -29,7 +29,7 @@ vim.keymap.set("n", "<C-j>", function() -- jump to next problem
   vim.diagnostic.goto_next()
 end, { desc = "jump to next diagnostic" })
 vim.keymap.set("n", "<leader>f", function()
-  vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+  require("conform").format({ bufnr = vim.api.nvim_get_current_buf() })
 end, { desc = "format buffer" }) -- format via lsp
 
 -- text stuff
@@ -57,8 +57,14 @@ vim.keymap.set("n", "fv", "<C-v>", { noremap = true, silent = true, desc = "vim 
 --   'copilot#Accept("\\<CR>")',
 --   { expr = true, replace_keycodes = false, desc = "accept copilot remap" }
 -- ) -- copilot tab remap
+vim.keymap.set("n", "<leader>zz", "<cmd>CopilotChatToggle<cr>", { desc = "Copilot Chat Toggle" })
+vim.keymap.set("v", "<leader>zz", "<cmd>CopilotChatToggle<cr>", { desc = "Copilot Chat (selection)" })
+vim.keymap.set("n", "<leader>zr", "<cmd>CopilotChatReset<cr>", { desc = "Copilot Chat Reset" })
+vim.keymap.set("n", "ze", "<cmd>CopilotChatExplain<cr>", { desc = "Copilot Explain" })
+vim.keymap.set("n", "zf", "<cmd>CopilotChatFix<cr>", { desc = "Copilot Fix" })
+vim.keymap.set("v", "ze", "<cmd>CopilotChatExplain<cr>", { desc = "Copilot Explain (selection)" })
+
 
 -- fun : )
 vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>", { desc = "meme: gravity mod" })
 vim.keymap.set("n", "<leader>bruh", "<cmd>CellularAutomaton game_of_life<CR>", { desc = "meme: convey's game of life" })
-

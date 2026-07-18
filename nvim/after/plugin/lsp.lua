@@ -91,6 +91,16 @@ vim.lsp.config('hdl_checker', {
   capabilities = lsp_capabilities,
 })
 
+vim.lsp.config('texlab', {
+  settings = {
+    texlab = {
+      build = {
+        onSave = false,
+      },
+    },
+  },
+})
+
 -- completion setup
 local cmp = require('cmp')
 cmp.setup({
@@ -114,3 +124,34 @@ cmp.setup({
     end,
   },
 })
+
+-- add log command to invoke and uninvoke
+-- :lua vim.cmd.edit(vim.fn.stdpath("state") .. "/lsp.log")
+
+vim.api.nvim_create_user_command("LspLogClear", function()
+  local log_path = vim.fs.joinpath(vim.fn.stdpath("state"), "lsp.log")
+  if vim.fn.filereadable(log_path) == 1 then
+    vim.fn.writefile({}, log_path)
+    print("LSP log cleared.")
+  else
+    print("LSP log file does not exist.")
+  end
+end, { desc = "Clear LSP log" })
+
+vim.api.nvim_create_user_command("LspLog", function()
+  local log_path = vim.fs.joinpath(vim.fn.stdpath("state"), "lsp.log")
+  if vim.fn.filereadable(log_path) == 1 then
+    vim.cmd.edit(log_path)
+  else
+    print("LSP log file does not exist.")
+  end
+end, { desc = "Toggle LSP log" })
+
+vim.api.nvim_create_user_command("LspRestart", function()
+  for _, client in ipairs(vim.lsp.get_clients()) do
+    if client.name ~= "copilot" then -- exclude copilot from restart
+      client.stop()
+    end
+  end
+  vim.cmd.edit() -- trigger LSP re-attach by reopening the current buffer
+end, { desc = "Restart LSP" })
