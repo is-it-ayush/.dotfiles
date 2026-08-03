@@ -17,6 +17,7 @@ export CONTAINER_SSHKEY="$SSH_KEY"
 export MANPATH="$LOCAL/man:$MANPATH" # manual
 export WINEPREFIX="/media/ayush/secondary/games/wine/prefixes/default/win64"
 export OLLAMA_MODELS="/media/ayush/secondary/models"
+export OLLAMA_HOST="0.0.0.0:11434"
 export DISABLE_AUTO_TITLE='true'
 
 # lang. (some of the variables don't update automatically under locale, thus we manually override)

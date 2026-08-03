@@ -32,8 +32,6 @@ require('mason-lspconfig').setup({
     end,
   },
 })
-
-
 vim.lsp.config('rust_analyzer', {
   settings = {
     ['rust-analyzer'] = {
@@ -62,8 +60,6 @@ vim.lsp.config('basedpyright', {
     }
   }
 })
-
--- tailwindcss setup
 vim.lsp.config('tailwindcss', {
   settings = {
     tailwindCSS = {
@@ -81,7 +77,6 @@ vim.lsp.config('tailwindcss', {
     },
   },
 })
-
 vim.lsp.config('hdl_checker', {
   cmd = { 'hdl_checker', '--lsp' },
   filetypes = { 'verilog', 'systemverilog', 'vhdl' },
@@ -90,7 +85,6 @@ vim.lsp.config('hdl_checker', {
   end,
   capabilities = lsp_capabilities,
 })
-
 vim.lsp.config('texlab', {
   settings = {
     texlab = {
